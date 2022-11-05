@@ -25,7 +25,32 @@ async function createTables() {
       CREATE TABLE products (
         id SERIAL PRIMARY KEY,
         title VARCHAR(255),
-        description VARCHAR(255)
+        description VARCHAR(255),
+        type VARCHAR(255), 
+        price MONEY,
+      );
+      CREATE TABLE users (
+          id SERIAL PRIMARY KEY,
+          username VARCHAR(255) UNIQUE NOT NULL,
+          password VARCHAR(255) NOT NULL,
+          name VARCHAR(255) NOT NULL,
+          location VARCHAR (255) NOT NULL,
+          birthday DATE NOT NULL, 
+          address VARCHAR(255) NOT NULL, 
+          active boolean DEFAULT true
+      );
+      CREATE TABLE orders (
+          id SERIAL PRIMARY KEY,
+          name VARCHAR(255) NOT NULL,
+          address VARCHAR(255) NOT NULL, 
+          price MONEY NOT NULL,
+      );
+      CREATE TABLE reviews (
+          id SERIAL PRIMARY KEY,
+          name VARCHAR(255),
+          description TEXT,
+          rating INTEGER(5),
+          "productId" INTEGER REFERENCES products(id),
       );
     `)
     
