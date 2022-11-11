@@ -8,10 +8,32 @@ async function createUser ({username, password, name,  birthday, address}) {
         ON CONFLICT (username) DO NOTHING
         RETURNING *;
         `, [username, password, name, birthday, address])
+        return user;
     }
-    catch (ex) {
-        console.log("Error with createUser function")
+    catch (error) {
+        throw error
     }
 }
 
-module.exports = {createUser}
+async function addToCart (productId) {
+    try{
+        await client.query(`
+        INSERT INTO users(cart)
+        VALUES ($1)
+        ON CONFLICT (cart) DO NOTHING
+        `, [productId])
+
+    }catch(error){
+        throw error;
+    }
+}
+
+// async function addtoUserCart(users) {
+//     try{
+//         const 
+//     } catch(error) {
+//         throw error
+//     }
+// }
+
+module.exports = {createUser, addToCart}

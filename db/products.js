@@ -10,8 +10,24 @@ async function createProduct({title, description, type,  price}) {
     
     return product;
   }
-  catch(ex) {
-    console.log('error in createProduct adapter function')
+  catch(error) {
+    throw error
+  }
+}
+ 
+async function getAllProducts() {
+  try {
+    const { rows: productID } = await client.query(`
+      SELECT id
+      FROM products; 
+    `);
+
+    const products = await Promise.all(productID.map(
+      product => getProductById(product.id)
+    ));
+    return products
+  } catch (error) {
+    throw error
   }
 }
 

@@ -1,6 +1,8 @@
 const { client } = require('./')
 
-const { createProduct } = require('./products')
+const { createProduct, getAllProducts, getProductById } = require('./products')
+const { createUser } = require('./users')
+const { createReview } = require('./reviews')
 
 async function dropTables() {
   console.log("Dropping All Tables...")
@@ -35,8 +37,14 @@ async function createTables() {
       );
       CREATE TABLE products (
         id SERIAL PRIMARY KEY,
-        title VARCHAR(255),
-        description VARCHAR(255)
+        title varchar(255) NOT NULL,
+        description TEXT NOT NULL, 
+        type varchar(255) NOT NULL,
+        price DECIMAL(19,3) NOT NULL
+      );
+      CREATE TABLE cart (
+        "userId" INTEGER REFERENCES users(id),
+        "productIds" INTEGER ARRAY
       );
       CREATE TABLE orders (
         id SERIAL PRIMARY KEY,
@@ -124,6 +132,36 @@ async function createInitialUsers() {
   }
 }
 
+async function createInitialReviews() {
+  console.log("Creating initial reviews...")
+  const [productTest1, productTest2, productTest3] = await getAllProducts()
+  try {
+    const review1 = await createReview({
+      name: "Review 1",
+      description: "Review Description 1",
+      rating: 1,
+      productId: productTest1.id
+    })
+    const review2 = await createReview({
+      name: "Review 2",
+      description: "Review Description 2",
+      rating: 2,
+      productId: productTest2.id
+    })
+    const review3 = await createReview({
+      name: "Review 3",
+      description: "Review Description 3",
+      rating: 5,
+      productId: productTest3.id
+    });
+    console.log("Finished creating reviews")
+    console.log("Reviews created:")
+    console.log(review1, review2, review3)
+  } catch (error) {
+    console.error("Error creating initial reviews")
+    throw error
+  }
+}
 async function buildDB() {
   try {
     // need to add something here
@@ -131,9 +169,12 @@ async function buildDB() {
     await dropTables();
     await createTables();
     await createInitialProducts();
+    await createInitialUsers();
+    await createInitialReviews();
   }
   catch (ex) {
     console.log('Error building the DB')
+    throw ex;
   }
 }
 
