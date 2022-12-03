@@ -1,11 +1,11 @@
-const { client } = require('./');
+const client = require('./index');
 
 async function createProduct({ title, description, type, price }) {
 
   try {
     const { rows: [product] } = await client.query(`
-      INSERT INTO products (title, description, type, price)
-      VALUES ($1, $2, $3, $4)
+      INSERT INTO products (title, description, type, category, price)
+      VALUES ($1, $2, $3, $4, $5)
       RETURNING *;
     `, [title, description, type, price])
 
@@ -33,6 +33,26 @@ async function getAllProducts() {
   }
 }
 
+async function getProductCategories() {
+
+  try {
+    const cat = await client.query(`
+      SELECT category
+      FROM products;  
+    `);
+
+    const products = await Promise.all(cat.map(
+      product => getProductById(product.id)
+    ));
+    console.log(products)
+    // const categories = await category.map(product);
+
+    return products
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 async function getProductById(id) {
 
   try {
@@ -55,6 +75,31 @@ async function getProductById(id) {
     throw error;
   }
 }
+
+async function getProductByCategory(category) {
+
+  try {
+    const { rows: [product] } = await client.query(`
+      SELECT *
+      FROM products
+      WHERE category=$1;  
+    `, [category]);
+
+    if (!product) {
+      throw {
+        error: "error",
+        name: "Product Not Found",
+        message: "The requested product was not found"
+      }
+    };
+
+    return product
+  } catch (error) {
+    throw error;
+  }
+}
+
+
 
 async function updateProduct({ id, ...fields }) {
 
@@ -104,4 +149,6 @@ module.exports = {
   getAllProducts,
   updateProduct,
   destroyProduct,
+  getProductByCategory,
+  getProductCategories
 }

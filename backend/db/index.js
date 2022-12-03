@@ -3,8 +3,13 @@ const { Client } = require('pg');
 const { DATABASE_URL } = process.env;
 
 const client = new Client({
-  connectionString: DATABASE_URL,
-  database: "graceShopper"
+  user: "postgres",
+  host: "localhost",
+  database: "ecommerce",
+  password: "password",
+  port: 5432,
+  // connectionString: DATABASE_URL,
+  // // database: "graceshopper"
 })
   
-module.exports = { client }
+module.exports = client

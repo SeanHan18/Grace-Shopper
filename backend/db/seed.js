@@ -13,9 +13,10 @@ async function dropTables() {
     DROP TABLE IF EXISTS reviews;
     DROP TABLE IF EXISTS carts;
     DROP TABLE IF EXISTS products;
+    DROP TABLE IF EXISTS categories;
     DROP TABLE IF EXISTS users;
-    `);
-
+  `);
+  
   console.log("Finished dropping tables!");
 }
 
@@ -37,7 +38,9 @@ async function createTables() {
       CREATE TABLE products (
         id SERIAL PRIMARY KEY,
         title varchar(255) NOT NULL,
-        description TEXT NOT NULL, 
+        description TEXT NOT NULL,
+        category VARCHAR NOT NULL,
+        image VARCHAR NOT NULL,
         type varchar(255) NOT NULL,
         price DECIMAL(19,3) NOT NULL
       );
@@ -54,7 +57,7 @@ async function createTables() {
         CHECK (rating BETWEEN 1 and 5),
         "productId" INTEGER REFERENCES products(id),
         "userId" INTEGER REFERENCES users(id)
-      );  
+      ); 
   `);
 
     console.log("Finished building tables!")
@@ -65,6 +68,8 @@ async function createTables() {
 
 async function createInitialProducts() {
 
+  // INSERT INTO products (title, description, category, image, type, price)
+  // VALUES ('title3', 'Just a desc', 'cat3', 'https://images.pexels.com/photos/13221455/pexels-photo-13221455.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 'type1', 20);
   try {
     console.log('Creating Products')
     const product1 = await createProduct({

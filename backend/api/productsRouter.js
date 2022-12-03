@@ -1,6 +1,9 @@
 const express = require('express');
 const productsRouter = express.Router();
-const { getAllProducts, createProduct, getProductById, destroyProduct, updateProduct } = require('../db/products');
+const expressAsyncHandler = require('express-async-handler');
+const client = require('../db');
+
+const { getAllProducts, createProduct, getProductById, destroyProduct, updateProduct, getProductByCategory, getProductCategories } = require('../db/products');
 const { requireAdmin, requireUser } = require("./utils");
 
 productsRouter.get('/', async (req, res, next) => {
@@ -8,7 +11,9 @@ productsRouter.get('/', async (req, res, next) => {
   try {
 
     const products = await getAllProducts();
+    
     res.send(products)
+    console.log(products)
 
   } catch (error) {
     throw error;
@@ -32,6 +37,43 @@ productsRouter.get("/:id", async (req, res, next) => {
       message: "Requested product was not found",
       name: "ProductNotFoundError"
     })
+  }
+})
+
+productsRouter.get("/cat/:category", async (req, res) => {
+
+  const { category } = req.params
+
+  try {
+
+    const product = await getProductByCategory(category)
+    res.send(product)
+
+  } catch (error) {
+
+    res.send({
+      error: "error",
+      message: "Requested products were not found",
+      name: "ProductNotFoundError"
+    })
+  }
+})
+
+productsRouter.get("/categories", async (req, res, next) => {
+  try {
+
+    const categories = await getProductCategories();
+    // res.send(categories)
+
+    // const categories = await client.query(`
+    //   SELECT category
+    //   FROM products;  
+    // `, [category]);
+
+    console.log(categories)
+
+  } catch (error) {
+    throw error;
   }
 })
 
