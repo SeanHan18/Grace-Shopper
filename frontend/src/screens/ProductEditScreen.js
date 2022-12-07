@@ -68,12 +68,12 @@ export default function ProductEditScreen() {
     const fetchData = async () => {
       try {
         dispatch({ type: 'FETCH_REQUEST' });
-        const { data } = await axios.get(`/api/products/${productId}`);
-        setName(data.name);
+        const { data } = await axios.get(`http://localhost:3001/api/products/${productId}`);
+        setName(data.title);
         setSlug(data.slug);
         setPrice(data.price);
         setImage(data.image);
-        setImages(data.images);
+        setImages(data.image);
         setCategory(data.category);
         setCountInStock(data.countInStock);
         setBrand(data.brand);
@@ -94,7 +94,7 @@ export default function ProductEditScreen() {
     try {
       dispatch({ type: 'UPDATE_REQUEST' });
       await axios.put(
-        `/api/products/${productId}`,
+        `http://localhost:3001/api/products/${productId}`,
         {
           id: productId,
           name,
@@ -207,7 +207,7 @@ export default function ProductEditScreen() {
             {loadingUpload && <LoadingBox></LoadingBox>}
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="additionalImage">
+          {/* <Form.Group className="mb-3" controlId="additionalImage">
             <Form.Label>Additional Images</Form.Label>
             {images.length === 0 && <MessageBox>No image</MessageBox>}
             <ListGroup variant="flush">
@@ -220,7 +220,7 @@ export default function ProductEditScreen() {
                 </ListGroup.Item>
               ))}
             </ListGroup>
-          </Form.Group>
+          </Form.Group> */}
           <Form.Group className="mb-3" controlId="additionalImageFile">
             <Form.Label>Upload Aditional Image</Form.Label>
             <Form.Control

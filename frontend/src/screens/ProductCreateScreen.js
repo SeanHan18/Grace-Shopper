@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import axios from 'axios';
+import React, { useContext, useReducer, useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Form from 'react-bootstrap/Form';
@@ -10,7 +11,40 @@ import { Axios } from 'axios';
 import { toast } from 'react-toastify';
 import { getError } from '../utils';
 
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'CREATE_REQUEST':
+      return { ...state, loadingCreate: true };
+    case 'CREATE_SUCCESS':
+      return {
+        ...state,
+        loadingCreate: false,
+      };
+    case 'CREATE_FAIL':
+      return { ...state, loadingCreate: false };
+    case 'UPLOAD_REQUEST':
+      return { ...state, loadingUpload: true, errorUpload: '' };
+    case 'UPLOAD_SUCCESS':
+      return {
+        ...state,
+        loadingUpload: false,
+        errorUpload: '',
+      };
+    case 'UPLOAD_FAIL':
+      return { ...state, loadingUpload: false, errorUpload: action.payload };
+    default:
+      return state;
+  }
+};
+
 const ProductCreateScreen = () => {
+
+  const [{ loadingCreate, error, loadingUpdate, loadingUpload }, dispatch] =
+    useReducer(reducer, {
+      loading: true,
+      error: '',
+    });
+
     const [name, setName] = useState('');
     const [slug, setSlug] = useState('');
     const [price, setPrice] = useState('');
@@ -25,7 +59,7 @@ const ProductCreateScreen = () => {
         e.preventDefault();
         
         try {
-        await Axios.post('/api/products', {
+        await Axios.post('http://localhost:3001/api/products', {
             name,
             slug,
             price,
@@ -42,6 +76,36 @@ const ProductCreateScreen = () => {
         toast.error(getError(err));
         }
     }
+
+    const uploadFileHandler = async (e, forImages, forPdf) => {
+      const file = e.target.files[0];
+      const bodyFormData = new FormData();
+      bodyFormData.append('file', file);
+      try {
+        dispatch({ type: 'UPLOAD_REQUEST' });
+        const { data } = await axios.post('/api/upload', bodyFormData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+        dispatch({ type: 'UPLOAD_SUCCESS' });
+        if (forImages) {
+          setImages([...images, data.secure_url]);
+        } else {
+          setImage(data.secure_url);
+        }
+        toast.success('Image uploaded successfully!');
+      } catch (err) {
+        toast.error(getError(err));
+        dispatch({ type: 'UPLOAD_FAIL', payload: getError(err) });
+      }
+    };
+  
+    const deleteFileHandler = async (fileName, f) => {
+      setImages(images.filter((x) => x !== fileName));
+      toast.success('Image removed successfully.');
+    };
+
   return (
     <Container className="small-container">
       <Helmet>

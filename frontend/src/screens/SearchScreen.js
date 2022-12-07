@@ -18,9 +18,11 @@ const reducer = (state, action) => {
     case 'FETCH_REQUEST':
       return { ...state, loading: true };
     case 'FETCH_SUCCESS':
+      var temp = [action.payload]
+      console.log(temp)
       return {
         ...state,
-        products: action.payload.products,
+        products: temp,
         // page: action.payload.page,
         // pages: action.payload.pages,
         // countProducts: action.payload.countProducts,
@@ -57,7 +59,7 @@ export default function SearchScreen() {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(
-          `/api/products/cat/${category}`
+          `http://localhost:3001/api/products/cat/${category}`
         );
         dispatch({ type: 'FETCH_SUCCESS', payload: data });
       } catch (err) {
@@ -74,7 +76,7 @@ export default function SearchScreen() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const { data } = await axios.get(`/api/products/categories`);
+        const { data } = await axios.get(`http://localhost:3001/api/products/categories`);
         setCategories(data);
       } catch (err) {
         toast.error(getError(err));
@@ -84,9 +86,8 @@ export default function SearchScreen() {
   }, [dispatch]);
 
   const getFilterUrl = (filter) => {
-    const filterCategory = filter.category || category;
-    
-    return `/searchcategory=${filterCategory}`;
+    const filterCategory = filter.category || category;    
+    return `/search?category=${filterCategory}`;
     
   };
   return (
@@ -96,21 +97,21 @@ export default function SearchScreen() {
       </Helmet>
       <Row>
         <Col md={3}>
-          <h3>Department</h3>
+          <h3>Categories</h3>
           <div>
-            <ul>
-              <li>
+            <ul className='list-group'>
+              <li className='list-group-item list-group-item-action'>
                 <Link
                   className={'all' === category ? 'text-bold' : ''}
-                  to={getFilterUrl({ category: 'all' })}
+                  to="/"
                 >
                   Any
                 </Link>
               </li>
               {categories.map((c) => (
-                <li key={c}>
+                <li className='list-group-item list-group-item-action' key={c}>
                   <Link
-                    className={c === category ? 'text-bold' : ''}
+                    className= {c === category ? 'text-bold' : ''}
                     to={getFilterUrl({ category: c })}
                   >
                     {c}
@@ -134,8 +135,7 @@ export default function SearchScreen() {
                   <div>
                     {category !== 'all' && ' : ' + category}
                   </div>
-                </Col>
-                
+                </Col>                
               </Row>
               {products.length === 0 && (
                 <MessageBox>No Product Found</MessageBox>

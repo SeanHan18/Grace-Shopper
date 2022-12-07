@@ -18,7 +18,7 @@ function Product(props) {
   const addToCartHandler = async (item) => {
     const existItem = cartItems.find((x) => x.id === product.id);
     const quantity = existItem ? existItem.quantity + 1 : 1;
-    const { data } = await axios.get(`/api/products/${item.id}`);
+    const { data } = await axios.get(`http://localhost:3001/api/products/${item.id}`);
     
     ctxDispatch({
       type: 'CART_ADD_ITEM',
@@ -29,7 +29,7 @@ function Product(props) {
   return (
     <Card>
       <Link to={`/product/${product.id}`}>
-        <img src={product.image} className="card-img-top" alt={product.name} />
+        <img src={product.image} className="card-img-top" alt={product.title} />
       </Link>
       <Card.Body>
         <Link to={`/product/${product.id}`}>

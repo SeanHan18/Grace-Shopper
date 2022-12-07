@@ -17,7 +17,7 @@ const reducer = (state, action) => {
     case 'FETCH_SUCCESS':
       return {
         ...state,
-        products: action.payload.products,
+        products: action.payload,
         page: action.payload.page,
         pages: action.payload.pages,
         loading: false,
@@ -81,7 +81,7 @@ export default function ProductListScreen() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`/api/products `, {
+        const { data } = await axios.get(`http://localhost:3001/api/products `, {
           headers: { Authorization: `Bearer ${userInfo.token}` },
         });
 
@@ -123,7 +123,7 @@ export default function ProductListScreen() {
   const deleteHandler = async (product) => {
     if (window.confirm('Are you sure to delete?')) {
       try {
-        await axios.delete(`/api/products/${product.id}`, {
+        await axios.delete(`http://localhost:3001/api/products/${product.id}`, {
           headers: { Authorization: `Bearer ${userInfo.token}` },
         });
         toast.success('product deleted successfully');
@@ -145,12 +145,12 @@ export default function ProductListScreen() {
         </Col>
         <Col className="col text-end">
           <div>
-            {/* <Link to='/admin/product/create'>
+            <Link to='/admin/product/create'>
               Create Product
-            </Link> */}
-            <Button type="button" onClick={createHandler}>
+            </Link>
+            {/* <Button type="button" onClick={createHandler}>
               Create Product
-            </Button>
+            </Button> */}
           </div>
         </Col>
       </Row>
@@ -179,10 +179,10 @@ export default function ProductListScreen() {
               {products.map((product) => (
                 <tr key={product.id}>
                   <td>{product.id}</td>
-                  <td>{product.name}</td>
+                  <td>{product.title}</td>
                   <td>{product.price}</td>
                   <td>{product.category}</td>
-                  <td>{product.brand}</td>
+                  <td>{product.type}</td>
                   <td>
                     <Button
                       type="button"

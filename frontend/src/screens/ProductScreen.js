@@ -48,7 +48,7 @@ function ProductScreen() {
 
   const navigate = useNavigate();
   const params = useParams();
-  const { id } = params;
+  const { slug } = params;
 
   const [{ loading, error, product, loadingCreateReview }, dispatch] =
     useReducer(reducer, {
@@ -60,22 +60,23 @@ function ProductScreen() {
     const fetchData = async () => {
       dispatch({ type: 'FETCH_REQUEST' });
       try {
-        const result = await axios.get(`/api/products/${id}`);
-        console.log(result)
+        const result = await axios.get(`http://localhost:3001/api/products/${slug}`);
+        console.log("Id", params);
+        console.log("result", result);
         dispatch({ type: 'FETCH_SUCCESS', payload: result.data });
       } catch (err) {
         dispatch({ type: 'FETCH_FAIL', payload: getError(err) });
       }
     };
     fetchData();
-  }, [id]);
+  }, [slug]);
 
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart, userInfo } = state;
   const addToCartHandler = async () => {
     const existItem = cart.cartItems.find((x) => x.id === product.id);
     const quantity = existItem ? existItem.quantity + 1 : 1;
-    const { data } = await axios.get(`/api/products/${product.id}`);
+    const { data } = await axios.get(`http://localhost:3001/api/products/${product.id}`);
     
     ctxDispatch({
       type: 'CART_ADD_ITEM',
@@ -92,7 +93,7 @@ function ProductScreen() {
     }
     try {
       const { data } = await axios.post(
-        `/api/products/${product.id}/reviews`,
+        `http://localhost:3001/api/products/${product.id}/reviews`,
         { rating, comment, name: userInfo.name },
         {
           headers: { Authorization: `Bearer ${userInfo.token}` },
@@ -127,16 +128,16 @@ function ProductScreen() {
           <img
             className="img-large"
             src={selectedImage || product.image}
-            alt={product.name}
+            alt={product.title}
           ></img>
         </Col>
         <Col md={3}>
           <ListGroup variant="flush">
             <ListGroup.Item>
               <Helmet>
-                <title>{product.name}</title>
+                <title>{product.title}</title>
               </Helmet>
-              <h1>{product.name}</h1>
+              <h1>{product.title}</h1>
             </ListGroup.Item>
             <ListGroup.Item>
               <Rating
