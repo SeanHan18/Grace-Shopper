@@ -86,7 +86,7 @@ async function createInitialProducts() {
       description: "These are bones bearings",
       type: "Bones",
       category: "Bearings",
-      image: "../Images/Bearings/Bones/CeramicSwiss/Image1.jpg",
+      image: "http://placeimg.com/500/500/any2",
       price: 30
     });
     const bearing3 = await createProduct({
@@ -94,7 +94,7 @@ async function createInitialProducts() {
       description: "These are bones bearings",
       type: "Bones",
       category: "Bearings",
-      image: "../Images/Bearings/Bones/OriginalSwiss/Image1.jpg",
+      image: "http://placeimg.com/500/500/any3",
       price: 30
     });
     const bearing4 = await createProduct({
@@ -102,7 +102,7 @@ async function createInitialProducts() {
       description: "These are bones bearings",
       type: "Bones",
       category: "Bearings",
-      image: "../Images/Bearings/Bones/RaceReds/Image1.jpg",
+      image: "http://placeimg.com/500/500/any4",
       price: 30
     });
     const bearing5 = await createProduct({
@@ -110,7 +110,7 @@ async function createInitialProducts() {
       description: "These are bones bearings",
       type: "Bones",
       category: "Bearings",
-      image: "../Images/Bearings/Bones/SuperSwiss6Ball/Image1.jpg",
+      image: "http://placeimg.com/500/500/any5",
       price: 30
     });
     
@@ -121,7 +121,7 @@ async function createInitialProducts() {
         description: "April - Yuto Skytree Deck 8.25 x 32",
         type: "April",
         category: "Decks",
-        image: "../Images/Decks/April/Image1.jpg",
+        image: "http://placeimg.com/500/500/any6",
         price: 45
       });
 
@@ -130,7 +130,7 @@ async function createInitialProducts() {
         description: "Blueprint - Home Heart Black on Black Deck 8.25 x 32",
         type: "Blueprint",
         category: "Decks",
-        image: "../Images/Decks/Blueprint/HomeHeartBlackBlack/Image1.jpg",
+        image: "http://placeimg.com/500/500/any7",
         price: 50
       });
 
@@ -139,7 +139,7 @@ async function createInitialProducts() {
         description: "Blueprint - Home Heart Black on Gold Deck 8.25 x 32",
         type: "Blueprint",
         category: "Decks",
-        image: "../Images/Decks/Blueprint/HomeHeartBlackGold/Image1.jpg",
+        image: "http://placeimg.com/500/500/any8",
         price: 50
       });
 
@@ -148,7 +148,7 @@ async function createInitialProducts() {
         description: "Element - '92 Classic Deck 7.75 x 32",
         type: "Element",
         category: "Decks",
-        image: "../Images/Decks/Element/92Classic/Image1.jpg",
+        image: "http://placeimg.com/500/500/any9",
         price: 55
       });
 
@@ -157,7 +157,7 @@ async function createInitialProducts() {
         description: "Element - Dispersion Deck 8 x 32",
         type: "Element",
         category: "Decks",
-        image: "../Images/Decks/Element/Dispersion/Image1.jpg",
+        image: "http://placeimg.com/500/500/any10",
         price: 55
       });
 
@@ -166,7 +166,7 @@ async function createInitialProducts() {
         description: "Element - Quadrant Deck 8 x 32",
         type: "Element",
         category: "Decks",
-        image: "../Images/Decks/Element/Quadrant/Image1.jpg",
+        image: "http://placeimg.com/500/500/any11",
         price: 60
       });
 
@@ -175,7 +175,7 @@ async function createInitialProducts() {
         description: "Element - Section Black Deck 8 x 32",
         type: "Element",
         category: "Decks",
-        image: "../Images/Decks/Element/SectionBlack/Image1.jpg",
+        image: "http://placeimg.com/500/500/any12",
         price: 60
       });
 
@@ -184,7 +184,7 @@ async function createInitialProducts() {
         description: "Element x Bob Ross - Everybody Needs a Friend Deck 7.75 x 32",
         type: "Element",
         category: "Decks",
-        image: "../Images/Decks/Element/EverybodyNeedsAFriend/Image1.jpg",
+        image: "http://placeimg.com/500/500/any13",
         price: 75
       });
 
@@ -193,7 +193,7 @@ async function createInitialProducts() {
         description: "Enjoi - Whitey Panda Deck 7.5 x 31",
         type: "Enjoi",
         category: "Decks",
-        image: "../Images/Decks/Enjoi/WhiteyPanda/Image1.jpg",
+        image: "http://placeimg.com/500/500/any14",
         price: 75
       });
 
@@ -202,7 +202,7 @@ async function createInitialProducts() {
         description: "Globe - G1 Stack Refracted Deck 8 x 31.6",
         type: "Globe",
         category: "Decks",
-        image: "../Images/Decks/Globe/Image1.jpg",
+        image: "http://placeimg.com/500/500/any15",
         price: 75
       });
 
@@ -213,7 +213,7 @@ async function createInitialProducts() {
         description: "Ace - AF1 Hollow Truck Polished Trucks",
         type: "Ace",
         category: "Trucks",
-        image: "../Images/Trucks/Ace/AF1 Hollow/Image1.jpg",
+        image: "http://placeimg.com/500/500/any16",
         price: 40
       });  
 
@@ -222,7 +222,7 @@ async function createInitialProducts() {
         description: "Independant - Stage 11 BTG Speed Standard Trucks",
         type: "Independant",
         category: "Trucks",
-        image: "../Images/Trucks/Independant/Stage11/BTGSpeedStandard/Image1.jpg",
+        image: "http://placeimg.com/500/500/any17",
         price: 40
       });  
 
@@ -231,7 +231,7 @@ async function createInitialProducts() {
         description: "Independant - Stage 11 Primitive Trucks",
         type: "Independant",
         category: "Trucks",
-        image: "../Images/Trucks/Independant/Stage11/PrimitiveMid/Image1.jpg",
+        image: "http://placeimg.com/500/500/any18",
         price: 40
       });  
 
@@ -240,7 +240,7 @@ async function createInitialProducts() {
         description: "Tensor - Alloys Truck Raw White Trucks",
         type: "Tensor",
         category: "Trucks",
-        image: "../Images/Trucks/Tensor/Alloys/Image1.jpg",
+        image: "http://placeimg.com/500/500/any19",
         price: 40
       });  
 
@@ -249,7 +249,7 @@ async function createInitialProducts() {
         description: "Venture - Worrest Custom V-Light Trucks",
         type: "Venture",
         category: "Trucks",
-        image: "../Images/Trucks/Venture/WorrestCustomV-Light/Image1.jpg",
+        image: "http://placeimg.com/500/500/any20",
         price: 40
       });  
 
@@ -260,7 +260,7 @@ async function createInitialProducts() {
         description: "Bones - ATF Rough Riders Black",
         type: "Bones",
         category: "Wheels",
-        image: "../Images/Wheels/Bones/ATF-RoughRiders/Black/Image1.jpg",
+        image: "http://placeimg.com/500/500/any21",
         price: 25
       });
 
@@ -269,7 +269,7 @@ async function createInitialProducts() {
         description: "Bones - ATF Rough Riders Green",
         type: "Bones",
         category: "Wheels",
-        image: "../Images/Wheels/Bones/ATF-RoughRiders/Green/Image1.jpg",
+        image: "http://placeimg.com/500/500/any22",
         price: 25
       });
 
@@ -278,7 +278,7 @@ async function createInitialProducts() {
         description: "Bones - ATF Rough Riders Red",
         type: "Bones",
         category: "Wheels",
-        image: "../Images/Wheels/Bones/ATF-RoughRiders/Red/Image1.jpg",
+        image: "http://placeimg.com/500/500/any23",
         price: 25
       });
 
@@ -287,7 +287,7 @@ async function createInitialProducts() {
         description: "Bones - STF Miskell Power 103a V5 Sidecut Wheels",
         type: "Bones",
         category: "Wheels",
-        image: "../Images/Wheels/Bones/STF/MiskellPower/Image1.jpg",
+        image: "http://placeimg.com/500/500/any24",
         price: 30
       });
 
@@ -296,7 +296,7 @@ async function createInitialProducts() {
         description: "Bones - STF Reaper Burial 99a V1 Wheels",
         type: "Bones",
         category: "Wheels",
-        image: "../Images/Wheels/Bones/STF/ReaperBurial/Image1.jpg",
+        image: "http://placeimg.com/500/500/any25",
         price: 30
       });
 
