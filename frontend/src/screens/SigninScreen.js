@@ -20,14 +20,16 @@ export default function SigninScreen() {
 
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { userInfo } = state;
-  const submitHandler = async (e) => {
-    e.preventDefault();
+  
+  const submitHandler = async (event) => {
+    event.preventDefault();
     try {
       const { data } = await Axios.post('/api/users/login', {
         username,
         password,
       });
       ctxDispatch({ type: 'USER_SIGNIN', payload: data });
+      console.log(userInfo)
       localStorage.setItem('userInfo', JSON.stringify(data));
       navigate(redirect || '/');
     } catch (err) {

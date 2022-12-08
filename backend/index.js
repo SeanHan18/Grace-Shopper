@@ -9,7 +9,7 @@ const productsRouter = require('./api/productsRouter');
 const reviewsRouter = require('./api/reviewsRouter');
 const cartRouter = require('./api/cartRouter');
 
-const client = require('./db/index');
+const {client} = require('./db/index');
 
 const connectDb = async () => {
   try{

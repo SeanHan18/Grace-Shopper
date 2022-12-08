@@ -1,4 +1,4 @@
-import axios from 'axios';
+
 import React, { useContext, useReducer, useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import ListGroup from 'react-bootstrap/ListGroup';
@@ -7,7 +7,7 @@ import { Helmet } from 'react-helmet-async';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import Button from 'react-bootstrap/Button';
-import { Axios } from 'axios';
+import Axios from 'axios';
 import { toast } from 'react-toastify';
 import { getError } from '../utils';
 
@@ -58,9 +58,10 @@ const ProductCreateScreen = () => {
     const submitHandler = async (e) =>{
         e.preventDefault();
         
+        const title = name
         try {
         await Axios.post('http://localhost:3001/api/products', {
-            name,
+            title,
             slug,
             price,
             image,
@@ -83,7 +84,7 @@ const ProductCreateScreen = () => {
       bodyFormData.append('file', file);
       try {
         dispatch({ type: 'UPLOAD_REQUEST' });
-        const { data } = await axios.post('/api/upload', bodyFormData, {
+        const { data } = await Axios.post('/api/upload', bodyFormData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },

@@ -1,4 +1,4 @@
-const client = require('./index');
+const {client} = require('./');
 const bcrypt = require('bcrypt');
 
 async function createUser({ username, password, birthday, admin }) {
