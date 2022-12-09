@@ -15,6 +15,7 @@ async function createInitialProducts() {
       description: "These are bones bearings",
       type: "Bones",
       category: "Bearings",
+      rating: 5,
       image: "../Images/Bearings/Bones/CeramicSuperReds/Image1.jpg",
       price: 30
     });

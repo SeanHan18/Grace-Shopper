@@ -91,7 +91,7 @@ function App() {
               </Button>
 
               <LinkContainer to="/">
-                <Navbar.Brand>Shop</Navbar.Brand>
+                <Navbar.Brand>Stalefish</Navbar.Brand>
               </LinkContainer>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">

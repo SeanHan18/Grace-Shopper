@@ -40,6 +40,8 @@ async function createTables() {
         title varchar(255) NOT NULL,
         description TEXT NOT NULL,
         category VARCHAR NOT NULL,
+        rating INTEGER,
+        CHECK (rating BETWEEN 0 and 5),
         image VARCHAR NOT NULL,
         type varchar(255) NOT NULL,
         price DECIMAL(19,3) NOT NULL
@@ -77,6 +79,8 @@ async function createInitialProducts() {
       title: "Bones - Ceramic Super Reds Bearings",
       description: "These are bones bearings",
       type: "Bones",
+      rating: 4,
+      numReviews: "150",
       category: "Bearings",
       image: "http://placeimg.com/500/500/any",
       price: 30
