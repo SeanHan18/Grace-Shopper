@@ -78,7 +78,7 @@ async function createInitialProducts() {
       description: "These are bones bearings",
       type: "Bones",
       category: "Bearings",
-      image: "http://placeimg.com/500/500/any",
+      image: "https://lh5.googleusercontent.com/IsNqbmShFi19vWdSmXYOa2PsnkPZgyne7ROUj4vUnTN-q9Qc0PSVFhKhWLsnV1RfqPc=w2400",
       price: 30
     });
     const bearing2 = await createProduct({
